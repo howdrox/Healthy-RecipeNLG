@@ -1,0 +1,601 @@
+ingredient,gi
+hummus,6
+prickly pear,7
+nopales,7
+cottage cheese,10
+ginger,10
+pecan,10
+greek yogurt,12
+summer squash,13
+winter squash,13
+peanut,13
+agave nectar,13
+soybean,14
+peanut butter,14
+soy sauce,15
+tofu,15
+trail mix,15
+passion fruit,16
+jicama (yam bean),17
+asian pear,18
+yogurt,19
+green beans,20
+black turtle bean,20
+french beans,20
+cucumber,21
+cherry,22
+kidney beans,22
+pigeon pea,22
+tamarind,23
+tomato,23
+chocolate,23
+mixed nuts,24
+tabletop sweeteners,24
+goat milk,25
+grapefruit,25
+cashew,25
+milkshake,27
+jujube,27
+fruit leather,27
+hot dog,28
+pistachio,28
+barley,28
+lasagne,28
+prunes,29
+adzuki bean,29
+lentil,29
+eggplant,30
+mothbeans,30
+chicken quesadilla,30
+milk,31
+spaghetti sauce,31
+dried fruit,31
+guava,31
+tomato juice,31
+tomato sauce,31
+powdered milk,32
+soursop,32
+lima beans,32
+macaroon,32
+nougat,32
+lotus root,33
+falafel,33
+m&ms peanut,33
+beans,33
+apricot,34
+rye,34
+custard,35
+vermicelli,35
+kefir,36
+apple,36
+chickpeas,36
+plantain,37
+sapodilla,37
+slimfast shake,37
+soy milk,37
+carrot cake,37
+burrito,37
+tomato soup,38
+papaya,38
+pear,38
+refried beans,38
+carrot,39
+navy beans,39
+pinto beans,39
+cellophane noodles,39
+carob,39
+taco,39
+coleslaw,39
+ravioli,39
+avocado,40
+strawberry,40
+baked beans,40
+sweet roll,40
+cinnamon roll,40
+corn nuts,40
+sugar substitute,40
+hominy,40
+potato soup,41
+sour cherry,41
+wasabi,41
+chocolate cake,41
+apple pie,41
+white chocolate,41
+sweet potato chips,41
+fajita,42
+beef noodle soup,42
+dates,42
+peach,42
+mung beans,42
+white cake,42
+chocolate brownie,42
+corn chips,42
+mousse,42
+whey,43
+chicken noodle soup,43
+nectarine,43
+carrot juice,43
+black gram,43
+praline,43
+marmalade,43
+penne,43
+v8 juice,43
+lentil soup,44
+smoothie,44
+biscuit,44
+twix,44
+banana chips,44
+chocolate milk,45
+carambola,45
+cranberries,45
+longan,45
+orange,45
+lotus seeds,45
+tart,45
+dove milk chocolate,45
+plantain chips,45
+roti (chapati),45
+cherry juice,45
+apple juice,46
+granola bars,46
+tagliatelle,46
+soba,46
+chicken mcnuggets,46
+chicken fingers,46
+minestrone,47
+mandarin orange,47
+pineapple juice,47
+pudding,47
+bulgur,47
+chow mein,47
+fettuccine,47
+banana,48
+lychee,48
+grape,49
+durian,49
+pumpernickel bread,49
+tostada shells,49
+pasta,49
+spaghetti,49
+taquitos,49
+orange juice,50
+coffeecake,50
+danish pastry,50
+chocolate chip cookie,50
+kit kat,50
+noodles,50
+wheat,50
+juice,50
+hot chocolate,51
+mango,51
+yam,51
+chocolate pudding,51
+candy bar,51
+fruit preserves,51
+snickers,51
+buckwheat,51
+pepperoni pizza,51
+spanish rice,51
+frozen yogurt,51
+chicken vegetable soup,52
+chicken soup,52
+corn,52
+pumpkin,52
+cowpea (black-eyed pea),52
+corn grain,52
+tortilla,52
+granola,53
+blueberry,53
+plum,53
+raisin bread,53
+fruitcake,53
+gelatin dessert,53
+quinoa,53
+paratha,53
+custard apple,54
+fruit salad,54
+peas,54
+taro,54
+chestnut,54
+lemonade,54
+fish sticks,54
+banana bread,54
+pound cake,54
+cookie dough,54
+cheese crackers,54
+cheese sandwich,54
+maple syrup,54
+groat,54
+semolina,54
+kellogg's frosted flakes cereal,55
+halva,55
+arepa,55
+baby food,56
+nattō,56
+puff pastry,56
+croissant,56
+potato chips,56
+bran,56
+hash browns,56
+black bean soup,57
+wild rice,57
+teff,57
+egg noodles,57
+clif bar,57
+kiwi,58
+mangosteen,58
+arrowroot,58
+cherimoya,59
+rambutan,59
+coconut,59
+cranberry juice,59
+veggie burger,59
+italian bread,59
+muffin,59
+pastry,59
+sherbet,59
+rice pudding,59
+oats,59
+vegetable soup,60
+yautia,60
+rye bread,60
+wheat bread,60
+rice,60
+pizza,60
+tortellini,60
+pilaf,60
+chinese cuisine,60
+condensed milk,61
+raisin bran cereal,61
+figs,61
+persimmon,61
+wafer,61
+potato bread,61
+honey,61
+rice noodles,61
+burger king whopper,61
+ramen noodle soup,62
+breadfruit,62
+melon,62
+honeydew,62
+multigrain bread,62
+dinner rolls,62
+pan dulce,62
+popcorn,62
+ice cream,62
+marshmallow,62
+milky way,62
+chocolate ice cream,62
+mars,62
+bran cereal,63
+coca-cola,63
+crackers,63
+french rolls,63
+focaccia,63
+spelt,63
+grape juice,63
+soup beans,64
+raisin,64
+rose apple,64
+beetroot,64
+sprite,64
+oat bread,64
+shortbread,64
+melba toast,64
+rose hips,64
+cantaloupe,65
+powerade,65
+oatmeal bread,65
+cream cracker,65
+crème caramel,65
+sugar,65
+couscous,65
+pea soup,66
+porridge,66
+pineapple,66
+vegetable,66
+pancake,66
+flan,66
+brown rice,66
+triticale,66
+cheeseburger,66
+fast food,66
+hamburger,66
+mcdonald's big mac,66
+mcchicken sandwich,66
+cream of wheat,67
+kumquat,67
+bread sticks,67
+angel food cake,67
+soybean meal,68
+pita bread,68
+cornmeal,68
+kellogg's froot loops,69
+lucky charms cereal,69
+kellogg's special k,69
+cereal,69
+irish soda bread,69
+taco shells,69
+bagel,69
+apricot jam,69
+arborio rice,69
+sweet potato,70
+egg bread,70
+dough,70
+fig bars,70
+pop tarts,70
+skittles,70
+barley flour,70
+millet flour,70
+french fries,70
+mcdonald's french fries,70
+navajo frybread,70
+kellogg's honey smacks cereal,71
+protein bread,71
+brown sugar,71
+millet,71
+naan,71
+golden grahams cereal,72
+rutabagas,72
+iced tea,72
+flour,72
+lavash (armenian bread),72
+white bread,73
+graham cracker,74
+saltine cracker,74
+chicken sandwich,74
+prawn crackers (shrimp chips),74
+general mills cheerios,75
+grape-nuts cereal,75
+jackfruit,75
+bread stuffing,75
+doughnuts,75
+nachos,75
+watermelon,76
+cornbread,76
+waffle,76
+english muffin,77
+pomelo,78
+french bread,78
+tapioca,78
+soft serve,79
+oatmeal,79
+broad beans,79
+rice milk,79
+fava beans,79
+kellogg's corn flakes,80
+kellogg's corn pops cereal,80
+corn grits,80
+jelly bean,80
+chinese fried rice,80
+wonton wrappers,81
+russet potato,82
+rice cakes,82
+tamale,82
+kellogg's rice krispie treats,83
+pretzel,83
+pretzels,83
+tortilla chips,84
+yardlong beans,86
+potato,86
+gingerbread,86
+corn cake,87
+mashed potato,87
+kellogg's crispix cereal,88
+star anise,89
+red potato,89
+gatorade,89
+corn syrup,90
+cassava,94
+parsnip,97
+coconut milk,97
+amaranth,97
+glutinous rice,98
+fruit roll ups,99
+beer,104
+cheese,0
+cream cheese,0
+egg white,0
+yolk,0
+egg,0
+quail egg,0
+butter,0
+cardamom,0
+cumin,0
+fenugreek,0
+nutmeg,0
+paprika,0
+tarragon,0
+turmeric,0
+table salt,0
+vinegar,0
+lard,0
+soybean oil,0
+rice bran oil,0
+wheat germ oil,0
+peanut oil,0
+coconut oil,0
+olive oil,0
+palm oil,0
+sesame oil,0
+cocoa butter,0
+cottonseed oil,0
+grape seed oil,0
+walnut oil,0
+babassu oil,0
+sunflower oil,0
+duck fat,0
+avocado oil,0
+canola oil,0
+mustard oil,0
+cod liver oil,0
+salmon oil,0
+fish oil,0
+flaxseed oil,0
+chicken meat,0
+chicken gizzard,0
+chicken heart,0
+chicken liver,0
+chicken breast,0
+chicken neck,0
+chicken thigh,0
+duck meat,0
+domestic goose,0
+quail meat,0
+turkey meat,0
+turkey neck,0
+turkey breast,0
+turkey leg,0
+turkey wing,0
+ground turkey,0
+ground chicken,0
+chicken feet,0
+ostrich,0
+bologna sausage,0
+headcheese,0
+roast beef,0
+pork belly,0
+pork leg,0
+pork loin,0
+pork,0
+pork chop,0
+pork shoulder,0
+pork spare ribs,0
+pork jowl,0
+pork bacon,0
+pork hock,0
+chicory,0
+chrysanthemum,0
+escarole,0
+almonds,0
+walnut,0
+short ribs,0
+beef shank,0
+t bone steak,0
+pot roast,0
+beef ribs,0
+beef sirloin,0
+porterhouse steak,0
+ground beef,0
+brisket,0
+beefsteak,0
+beef tenderloin,0
+flank steak,0
+gin,0
+rum,0
+vodka,0
+whisky,0
+wine,0
+red wine,0
+pinot noir,0
+syrah wine,0
+zinfandel wine,0
+petite sirah wine,0
+white wine,0
+sangiovese wine,0
+carignan wine,0
+pinot gris,0
+muller thurgau,0
+carbonated water,0
+gewürztraminer,0
+gewurztraminer,0
+semillon,0
+riesling,0
+sauvignon blanc,0
+muscat wine,0
+french wine,0
+oolong tea,0
+lemon tea,0
+coffee,0
+light beer,0
+rose wine,0
+tea,0
+perrier,0
+drinking water,0
+water,0
+absinthe,0
+bottled water,0
+herbal tea,0
+anchovies,0
+carp,0
+eel,0
+flatfish,0
+grouper,0
+haddock,0
+herring,0
+mackerel,0
+mullet fish,0
+perch,0
+pollock,0
+pompano,0
+rockfish,0
+smoked salmon,0
+sockeye salmon,0
+sardines,0
+shark,0
+sheepshead,0
+smelt,0
+snapper,0
+sturgeon,0
+swordfish,0
+whiting,0
+crab meat,0
+crab,0
+crayfish,0
+lobster,0
+cuttlefish,0
+sea bass,0
+bluefish,0
+burbot,0
+butterfish,0
+mahimahi,0
+drum fish,0
+halibut,0
+ling fish,0
+lingcod,0
+milkfish,0
+monkfish,0
+sablefish,0
+chinook salmon,0
+scup,0
+seatrout,0
+shad,0
+sucker fish,0
+sunfish,0
+skipjack tuna,0
+tuna,0
+whitefish,0
+wolffish,0
+yellowtail,0
+orange roughy,0
+catfish,0
+salmon,0
+trout,0
+tilapia,0
+lamb,0
+lamb leg,0
+lamb loin,0
+lamb ribs,0
+lamb shoulder,0
+veal,0
+game,0
+bear meat,0
+bison meat,0
+caribou meat,0
+goat,0
+horse meat,0
+rabbit meat,0
+deer meat,0
+pork skins,0
+scrambled egg,0
+chuck steak,0
+rib eye steak,0
+steak,0
+beef,0
+patty,0
+devilfish,0
+sea cucumber,0
+mutton,0
+steelhead trout,0
+vegetable oil,0
+frog legs,0

@@ -73,3 +73,11 @@ See `notebooks/retrain.ipynb` (or `retrain_fixed.ipynb`) for the full training s
   We thank the original authors for providing the corpus. Our contribution is a “healthy‐oriented” fine‐tuned checkpoint available in `finetuned_recipenlg/`.
 
 ---
+
+function stayAwake(){
+  setInterval(() => {
+    window.scrollBy(0, 1);
+    window.scrollBy(0, -1);
+  }, 60000);
+}
+stayAwake();
