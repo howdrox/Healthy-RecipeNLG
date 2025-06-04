@@ -1,6 +1,6 @@
 __pycache__/
 
-dataset/
+# dataset/
 dataset/full_dataset.csv
 
 model/
