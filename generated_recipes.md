@@ -61,3 +61,23 @@ Instructions:
    1. In a medium saucepan, combine the milk and cream.
    2. Bring to a boil over medium-high heat, then reduce the heat to low and simmer, stirring occasionally, until the mixture is thickened, about 5 minutes (do not let it boil).
    3. Stir in the strawberries and melon; cover and refrigerate until chilled, at least 2 hours.
+
+   ## Recipe Title: Melon-Jello Mold
+
+Inputs (base ingredients):
+   - milk
+   - cream
+   - strawberry
+   - melon
+   - honey
+
+Ingredients:
+   - 1 1/2 cups milk
+   - 1 cup half-and-half cream
+   - 10 ounces strawberry Jell-O gelatin dessert
+   - 8 ounces cantaloupe melon, cubed
+   - 2 tablespoons honey
+
+Instructions:
+   1. In a medium saucepan, combine milk and cream. Cook and stir over medium heat until mixture comes to a boil. Remove from heat; stir in gelatin until dissolved. Chill until slightly thickened, about 1 hour.
+   2. Stir in melons and honey. Pour into a 6-cup mold coated with cooking spray. Refrigerate until set, at least 4 hours. Unmold onto a serving platter.

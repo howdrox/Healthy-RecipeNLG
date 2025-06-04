@@ -3,4 +3,4 @@ __pycache__/
 # dataset/
 dataset/full_dataset.csv
 
-model/
+# model/
