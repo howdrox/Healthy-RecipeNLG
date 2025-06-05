@@ -119,3 +119,23 @@ Instructions:
 1.  In a medium saucepan, combine the milk, half and half, strawberries and melon.
 2.  Bring to a boil over medium-high heat, then reduce the heat to medium and simmer until the fruit is soft, about 10 minutes. Stir in the honey and season with salt and pepper. Set aside to cool to room temperature, stirring occasionally to prevent discolouring. Place the salmon in a resealable plastic bag and pour the cooled fruit mixture over the top. Seal the bag, pressing out as much air as possible. Refrigerate for at least 4 hours or overnight, turning once. Remove from the refrigerator 30 minutes before grilling. Preheat an outdoor grill for medium heat (350° to 400°).
 3.  Grill salmon, skin side down, until just cooked through, 4 to 6 minutes, depending on thickness. Serve with the strawberry sauce.
+
+## Recipe Title: Apple-Pear Compote
+
+Inputs (base ingredients):
+   - apple
+   - cinamon
+   - butter
+   - pear
+   - honey
+
+Ingredients:
+   - 1 apple, cored and cut into wedges
+   - 1/4 teaspoon camon seed
+   - 2 tablespoons butter or 2 tablespoons margarine
+   - 3 pear halves in juice, skinned and quartered
+   - 4 teaspoons honey
+
+Instructions:
+   1. In a small skillet over medium heat, saute the apple in the butter until tender, about 5 minutes.
+   2. Add the pears and cook until heated through, 2-3 minutes longer. Add the honey and serve.
