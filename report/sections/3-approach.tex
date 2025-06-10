@@ -1,0 +1,9 @@
+\section{Approach}
+
+\subsection{Model Architecture}
+The model employed in the cooking recipes generator is based on GPT-2, a transformer-based language model developed by OpenAI. Specifically, the code uses the pre-trained model mbien/recipenlg, which is a fine-tuned version of GPT-2 designed for generating semi-structured text, such as cooking recipes. This model is part of the RecipeNLG project, which aims to address the challenge of generating structured and context-aware texts, particularly for recipes.
+
+From the model details, mbien/recipenlg has 176 million parameters, aligning with the GPT-2 medium model size. This architecture is well-suited for text generation tasks due to its ability to process sequential data and predict the next token based on context, making it ideal for generating coherent recipe texts.
+
+GPT-2 is a causal language model, meaning it is trained to predict the next token in a sequence given the previous tokens. It uses a transformer decoder, which is a type of neural network architecture that relies on self-attention mechanisms to understand the relationships between words in a sentence. This allows GPT-2 to generate text that is not only coherent but also contextually relevant, which is crucial for generating recipes that follow a logical structure (e.g., listing ingredients before instructions).
+

@@ -1,0 +1,38 @@
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+\usepackage[pagebackref,breaklinks,colorlinks]{hyperref}
+
+
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\confName{ICCV}
+\def\confYear{2021}
+% \graphicspath{{./figs/}{./figs/result/}}
+%\setcounter{page}{4321} % For final version only
+
+\graphicspath{{img/}}
+
+\usepackage[most]{tcolorbox}
+
+\tcbset{
+  recipebox/.style={
+    colback=gray!5!white,
+    colframe=black!50,
+    fonttitle=\bfseries,
+    title={#1},
+    sharp corners,
+    boxrule=0.8pt,
+    % width=\textwidth,
+    enlarge left by=0mm,
+    before skip=10pt,
+    after skip=10pt,
+  }
+}

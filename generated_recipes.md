@@ -139,3 +139,21 @@ Ingredients:
 Instructions:
    1. In a small skillet over medium heat, saute the apple in the butter until tender, about 5 minutes.
    2. Add the pears and cook until heated through, 2-3 minutes longer. Add the honey and serve.
+
+## Recipe Title: Dried Beef And Pear Salad
+
+Inputs (base ingredients):
+   - chocolate
+   - pickles
+   - beef
+   - pear
+
+Ingredients:
+   - 1 (4 oz.) pkg. chocolate or butterscotch pudding mix
+   - 1/2 c. chopped pickles
+   - 2 oz. jar dried beef, chopped
+   - peel of 1/4 medium pear
+
+Instructions:
+   1. Mix pudding and pickle in a bowl.
+   2. Add beef and pear. Chill.

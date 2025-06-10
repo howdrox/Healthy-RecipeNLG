@@ -1,0 +1,21 @@
+\title{Deep Learning Final Report}
+
+\author{Louis Etienne Kusno\\
+Tsinghua University\\
+{\tt\small louis.kusno@insa-lyon.fr}
+\and
+David Qi\\
+Tsinghua University\\
+{\tt\small qidavid77@gmail.com}
+\and
+Spencer Xi Zhou\\
+Tsinghua University\\
+{\tt\small spencer.zhou42@gmail.com}
+}
+
+\maketitle
+
+
+\begin{abstract}
+Personalized recipe generation has become increasingly relevant with the rise of health-conscious dietary needs. Traditional recipe generation systems often overlook critical nutritional constraints, such as glycemic index, making them unsuitable for users managing conditions like diabetes. In this work, we address the problem of generating recipes that adhere to dietary restrictions by fine-tuning a pre-trained GPT-2 language model on a filtered subset of the RecipeNLG dataset. Our subset includes only recipes with low-glycemic-index ingredients and manageable token lengths to ensure high-quality outputs. We retrain the model using the Hugging Face Transformers library and generate new recipes via conditional text generation based on user-specified ingredients. Qualitative analysis shows that our model effectively creates plausible, coherent recipes while maintaining the desired health constraints. Our approach demonstrates the potential for using large language models in personalized nutrition planning and sets the stage for future improvements in controlled text generation for health-related applications.
+\end{abstract}

@@ -1,0 +1,181 @@
+\section{Experiments}
+
+\subsection{Dataset Preparation}
+
+Personalized recipe generation involves creating nutritionally optimized meals tailored to dietary restrictions. We will use the following measurements to define what is "healthy":
+
+\begin{description}
+	\item[Low Glycemic Index (GI)] GI $\leq$ 55
+	\item[Low Carbohydrates] Total carbs $\leq$ 45--60\,g per meal for adults
+	\item[Low Sugars] Added sugars $< 10\%$ of daily calories
+	\item[Balanced Nutrients] Adequate protein and healthy fats, with minimal saturated fats
+	\item[Portion Control] Reasonable serving sizes to meet caloric needs
+\end{description}
+
+I then scrapped \cite{foodstruct_glycemic_index} to get the glycemic index of base ingredients. Then filtered the RecipeNLG \cite{bien2020recipenlg} dataset to only include recipes with low glycemic index ingredients. A recipe was kept only if the majority of its ingredients had a glycemic index $\leq$ 55. This brought the dataset from 2,231,142 (\texttt{full\_dataset.csv}) to 3,419 recipes (\texttt{h\_recipes\_50pct.csv}). To speed up training, I then filtered the recipes that have a token count of less than or equal to 512 tokens, which brought the dataset down to 3,398 recipes (\texttt{h\_recipes\_50pct\_token\_max512.csv}). This greatly increased the training speed and reduced the memory usage, as the model was trained on a single GPU with 12.7GB of memory (Google Colab).
+
+Since the dataset was not perfectly formatted, I had to do some additional cleaning in the beginning. All recipes had to have ingredients that had a glycemic index, the RecipeNLG dataset sometimes had duplicated ingredients, such as \texttt{apple} and \texttt{apples} so a check for plurals was added.
+
+Every recipe was tokenized using the \cite{bien2020recipenlg} tokenizer, therefore specific tags had to be added to the recipes.
+\begin{description}
+	\item[\textless RECIPE\_START\textgreater...{\textless RECIPE\_END\textgreater}] Marks the start and end of a recipe.
+	\item[\textless INPUT\_START\textgreater...\textless NEXT\_INPUT\textgreater...\textless INPUT\_END\textgreater] Marks the ingredient names extracted via Named Entity Recognition (NER).
+	\item[\textless INGR\_START\textgreater...\textless NEXT\_INGR\textgreater...\textless INGR\_END\textgreater] Marks the full ingredient lines as listed in the recipe.
+	\item[\textless INSTR\_START\textgreater...\textless NEXT\_INSTR\textgreater...\textless INSTR\_END\textgreater] Marks the step-by-step cooking instructions.
+	\item[\textless TITLE\_START\textgreater...\textless TITLE\_END\textgreater] Marks the recipe title.
+\end{description}
+
+Within each section, items were separated by \texttt{\textless NEXT\_INPUT\textgreater}, \texttt{\textless NEXT\_INGR\textgreater}, or \texttt{\textless NEXT\_INSTR\textgreater} as appropriate.
+
+The final dataset was saved as \texttt{h\_recipes\_50pct\_token\_max512\_tagged.csv}.
+
+\subsection{Model Training}
+
+The model was trained using the Hugging Face \cite{wolf2019huggingface} Trainer API with the following parameters:
+
+\begin{itemize}
+	\item \textbf{Learning rate:} 5e-5
+	\item \textbf{Batch size:} 8 (per device for train \& eval)
+	\item \textbf{Epochs:} 10
+	\item \textbf{Optimizer:} AdamW (betas=(0.9, 0.999), eps=1e-8)
+	\item \textbf{Scheduler:} Linear with warmup\_steps=50
+	\item \textbf{Mixed precision:} fp16=True on GPU (as Google Colab was used)
+	\item \textbf{Seed:} 42
+	\item \textbf{Save steps:} 50 (keep the latest 2 checkpoints)
+	\item \textbf{Logging steps:} 100 (loss \& lr to TensorBoard, no WandB)
+	\item See \texttt{notebooks/retrain.ipynb} for the full training script.
+\end{itemize}
+
+\subsection{Model Run Parameters}
+
+The following parameters were used to run the model and generate recipes:
+
+\textbf{Prompt:}
+
+Give me a healthy recipe using the following ingredients (you don't have to use all of them): \texttt{<RECIPE\_START>} \texttt{<INPUT\_START>} chocolate \texttt{<NEXT\_INPUT>} pickles \texttt{<NEXT\_INPUT>} beef \texttt{<NEXT\_INPUT>} pear \texttt{<INPUT\_END>} (in practice, the spaces were remove to decrease the token count).
+
+\textbf{Tokenization parameters:}
+\begin{itemize}
+	\item \texttt{truncation=True}
+	\item \texttt{max\_length=512}
+	\item \texttt{return\_attention\_mask=True}
+\end{itemize}
+
+\textbf{Generation parameters:}
+\begin{itemize}
+	\item \texttt{max\_length=512}
+	\item \texttt{num\_beams=2 or 5}  (for beam search)
+	\item \texttt{no\_repeat\_ngram\_size=2}
+	\item \texttt{early\_stopping=True}
+	\item \texttt{eos\_token\_id} set to the token ID for \texttt{<RECIPE\_END>}
+\end{itemize}
+
+The \texttt{no\_repeat\_ngram\_size=2} was particularly useful to prevent the model from repeating the same ingredient or instruction multiple times, which is a common issue with text generation models. Moreover, a beam search with \texttt{num\_beams=2} or \texttt{num\_beams=5} was used to improve the quality of the generated recipes, as it allows the model to explore multiple possible continuations of the text and select the most likely one based on the learned probabilities.
+
+\subsection{Results}
+
+Here are some examples of the generated recipes with the same base ingredients:
+
+\begin{tcolorbox}[recipebox={Melon and Strawberry Ice Cream}]
+	\textbf{Inputs (base ingredients):} milk, cream, strawberry, melon, honey
+
+	\vspace{0.5em}
+	\textbf{Ingredients:}
+	\begin{itemize}
+		\item 2 cups milk
+		\item 1 cup half-and-half cream
+		\item 1/2 cup strawberry, hulled and quartered
+		\item 8 ounces cantaloupe, peeled, seeded, and cut into 1/2-inch cubes
+		\item 2 tablespoons honey
+	\end{itemize}
+
+	\vspace{0.5em}
+	\textbf{Instructions:}
+	\begin{enumerate}
+		\item In a medium saucepan, combine the milk and cream.
+		\item Bring to a boil over medium-high heat, then reduce the heat to low and simmer, stirring occasionally, until the mixture is thickened, about 5 minutes (do not let it boil).
+		\item Stir in the strawberries and melon; cover and refrigerate until chilled, at least 2 hours.
+	\end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}[recipebox={Melon-Jello Mold}]
+	\textbf{Inputs (base ingredients):} milk, cream, strawberry, melon, honey
+
+	\vspace{0.5em}
+	\textbf{Ingredients:}
+	\begin{itemize}
+		\item 1 1/2 cups milk
+		\item 1 cup half-and-half cream
+		\item 10 ounces strawberry Jell-O gelatin dessert
+		\item 8 ounces cantaloupe melon, cubed
+		\item 2 tablespoons honey
+	\end{itemize}
+
+	\vspace{0.5em}
+	\textbf{Instructions:}
+	\begin{enumerate}
+		\item In a medium saucepan, combine milk and cream. Cook and stir over medium heat until mixture comes to a boil. Remove from heat; stir in gelatin until dissolved. Chill until slightly thickened, about 1 hour.
+		\item Stir in melons and honey. Pour into a 6-cup mold coated with cooking spray. Refrigerate until set, at least 4 hours. Unmold onto a serving platter.
+	\end{enumerate}
+\end{tcolorbox}
+
+Next I tried adding an ingredient that is would not fit in such a recipe, such as \texttt{salmon}:
+
+\begin{tcolorbox}[recipebox={Grilled Salmon With Strawberry Sauce}]
+	\textbf{Inputs (base ingredients):}
+	\begin{itemize}
+		\item milk
+		\item cream
+		\item strawberry
+		\item melon
+		\item honey
+		\item salmon
+	\end{itemize}
+
+	\vspace{0.5em}
+	\textbf{Ingredients:}
+	\begin{itemize}
+		\item 1 1/2 cups milk
+		\item 1 cup half-and-half cream
+		\item 12 ounces strawberry, hulled and quartered
+		\item 8 ounces cantaloupes, peeled, seeded and cubed
+		\item 2 tablespoons honey
+		\item 4 (6-ounce) salmon fillets
+	\end{itemize}
+
+	\vspace{0.5em}
+	\textbf{Instructions:}
+	\begin{enumerate}
+		\item In a medium saucepan, combine the milk, half and half, strawberries and melon.
+		\item Bring to a boil over medium-high heat, then reduce the heat to medium and simmer until the fruit is soft, about 10 minutes. Stir in the honey and season with salt and pepper. Set aside to cool to room temperature, stirring occasionally to prevent discolouring. Place the salmon in a resealable plastic bag and pour the cooled fruit mixture over the top. Seal the bag, pressing out as much air as possible. Refrigerate for at least 4 hours or overnight, turning once. Remove from the refrigerator 30 minutes before grilling. Preheat an outdoor grill for medium heat (350° to 400°).
+		\item Grill salmon, skin side down, until just cooked through, 4 to 6 minutes, depending on thickness. Serve with the strawberry sauce.
+	\end{enumerate}
+\end{tcolorbox}
+
+However, the model does not always pair the ingredients in the most optimal way, as shown in the following example. A better recipe would have been to match the \texttt{pear} and \texttt{chocolate} together, and the \texttt{beef} and \texttt{pickles} together.
+
+\begin{tcolorbox}[recipebox={Dried Beef And Pear Salad}]
+	\textbf{Inputs (base ingredients):}
+	\begin{itemize}
+		\item chocolate
+		\item pickles
+		\item beef
+		\item pear
+	\end{itemize}
+
+	\vspace{0.5em}
+	\textbf{Ingredients:}
+	\begin{itemize}
+		\item 1 (4 oz.) pkg. chocolate or butterscotch pudding mix
+		\item 1/2 cup chopped pickles
+		\item 2 oz. jar dried beef, chopped
+		\item peel of 1/4 medium pear
+	\end{itemize}
+
+	\vspace{0.5em}
+	\textbf{Instructions:}
+	\begin{enumerate}
+		\item Mix pudding and pickle in a bowl.
+		\item Add beef and pear. Chill.
+	\end{enumerate}
+\end{tcolorbox}
