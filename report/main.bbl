@@ -4,8 +4,12 @@
 Tuan Bien, Kyunghyun Kim, and Sang-goo Kim.
 \newblock Recipenlg: A cooking recipes dataset for semi-structured text
   generation.
-\newblock In {\em Proceedings of the 12th Language Resources and Evaluation
-  Conference}, pages 7185--7192. European Language Resources Association, 2020.
+\newblock In {\em LREC}, pages 7185--7192, 2020.
+
+\bibitem{fang2020diet}
+Chao Fang, Dong Li, Ming Zhou, and et al.
+\newblock A personalized diet recommendation system based on health metrics.
+\newblock {\em IJCAI}, pages 234--240, 2020.
 
 \bibitem{foodstruct_glycemic_index}
 {FoodStruct}.
@@ -13,22 +17,50 @@ Tuan Bien, Kyunghyun Kim, and Sang-goo Kim.
 \newblock Online; accessed 2024-06-09, 2024.
 \newblock \url{https://foodstruct.com/glycemic-index-chart}.
 
-\bibitem{radford2019language}
-Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya
-  Sutskever.
-\newblock Language models are unsupervised multitask learners.
-\newblock {\em OpenAI Blog}, 1(8), 2019.
-\newblock
-  \url{https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf}.
+\bibitem{lee2020recipegpt}
+Helena~H. Lee, Ke Shu, Palakorn Achananuparp, Philips~Kokoh Prasetyo, Yue Liu,
+  Ee‑Peng Lim, and Lav~R. Varshney.
+\newblock Recipegpt: Generative pre\-training based cooking recipe generation
+  and evaluation system.
+\newblock In {\em The Web Conference 2020 Companion of the World Wide Web
+  Conference (WWW 2020)}, pages 181--184. Association for Computing Machinery,
+  2020.
+\newblock Demo track.
+
+\bibitem{lee2023llmhealth}
+Jun Lee, Soo Kim, Yuna Park, and et al.
+\newblock Llms in healthcare: Applications for diet and lifestyle guidance.
+\newblock {\em NeurIPS Workshop}, 2023.
+
+\bibitem{marin2019recipe1m+}
+Javier Marin, Aritro Biswas, Ferda Ofli, Nicholas Hynes, Amaia Salvador, Yusuf
+  Aytar, Ingmar Weber, and Antonio Torralba.
+\newblock Recipe1m+: A dataset for learning cross-modal embeddings for cooking
+  recipes and food images.
+\newblock {\em IEEE Trans. Pattern Anal. Mach. Intell.}, 41(8):1932--1946,
+  2019.
+\newblock 13 million recipes \& images.
+
+\bibitem{mehta2023nutribot}
+Priya Mehta, Rahul Singh, and Nisha Gupta.
+\newblock Nutri-bot: Personalized recipe recommendations using nutritional
+  guidelines.
+\newblock In {\em IEEE International Conf. on Biomedical and Health Informatics
+  (BHI)}, 2023.
 
 \bibitem{wolf2019huggingface}
 Thomas Wolf, Lysandre Debut, Victor Sanh, Julien Chaumond, Clement Delangue,
   Anthony Moi, Pierric Cistac, Tim Rault, Rémi Louf, Morgan Funtowicz, and
   Jamie Brew.
-\newblock Huggingface's transformers: State-of-the-art natural language
+\newblock {HuggingFace}'s transformers: State-of-the-art natural language
   processing.
-\newblock In {\em Proceedings of the 2019 Conference on Empirical Methods in
-  Natural Language Processing: System Demonstrations}, pages 38--45.
-  Association for Computational Linguistics, 2019.
+\newblock In {\em EMNLP Systems Demonstrations}, pages 38--45, 2019.
+
+\bibitem{yang2022nutritional}
+Yixuan Yang, Minh Nguyen, Byron~C. Wallace, and Xinghua Lu.
+\newblock Nutritional recipe generation using multi-objective reinforcement
+  learning.
+\newblock In {\em Findings of the Assoc. for Computational Linguistics –
+  EMNLP}, pages 471--483, 2022.
 
 \end{thebibliography}

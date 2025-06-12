@@ -1,11 +1,7 @@
 \section{Introduction}
 
-Existing recipe generators often ignore dietary restrictions like low-glycemic needs for diabetes, producing meal plans misaligned with medical guidelines. This limits effective, personalized meal planning for health-conscious individuals.
+Home cooks and diet conscious individuals frequently rely on automated meal planning tools, yet these systems often fail to incorporate essential nutritional constraints such as low glycemic index (GI), low sugar, and balanced macronutrients. This gap is particularly problematic for users managing conditions like diabetes or seeking to maintain stable blood glucose levels.
 
-We present a recipe generator for healthy recipes. Has it ever happened to you that you wanted to cook something you look into your fridge and can't come up with a recipe? Or you have a recipe in mind but you don't have all the ingredients? And you care about your health and want to eat healthy? This is where our recipe generator comes in. It takes a list of ingredients you have at home and generates a healthy recipe based on those ingredients. The recipe is generated using a large language model (LLM) that has been fine-tuned on a dataset of healthy recipes.
+In this work, we present a personalized recipe generation framework that transforms a large language model into a health aware assistant. Rather than computing exact nutritional values—which requires detailed ingredient data and complex modeling—we adopt a practical strategy: we fine tune GPT-2 on a carefully filtered subset of the RecipeNLG corpus containing only low GI recipes. This allows the model to internalize patterns of health compliant meal composition while retaining linguistic fluency and structural coherence.
 
-To do this we retrained an GPT-2 model on a dataset of healthy recipes.
-
-\begin{center}
-	\includegraphics[width=0.5\linewidth]{food_conscious}
-\end{center}
+By conditioning on user provided ingredient lists, our system generates recipes that align with dietary guidelines without demanding expert knowledge from end users. We demonstrate that a standard transformer decoder, once exposed exclusively to nutritious recipe examples, can output meal instructions that are both plausible in the kitchen and consistent with health goals. In doing so, we bridge the gap between cutting edge natural language generation and real world nutritional planning.

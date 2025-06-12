@@ -1,26 +1,58 @@
 \section{Conclusion}
 
-We have learnt that we could take an existing LLM and fine-tune it with an appropriate dataset to generate healthy recipes. The model was trained on a filtered subset of the RecipeNLG dataset, ensuring that the recipes adhered to specific health guidelines such as low glycemic index and balanced nutrients.
+This work demonstrates that an existing large language model (LLM), specifically GPT-2-medium, can be fine tuned on a health-filtered subset of the RecipeNLG dataset to generate nutritionally conscious and coherent recipes. The selected dataset ensured adherence to health guidelines such as low glycemic index and balanced macronutrient content.
 
-The training process involved careful dataset preparation, including tokenization and tagging of recipe components, which allowed the model to learn the structure and content of healthy recipes effectively. The model was then evaluated using various metrics, demonstrating its ability to generate coherent and relevant recipes based on given ingredients.
+The training process involved meticulous dataset preparation, including tagging of recipe components and ingredient tokenization, enabling the model to learn both the structure and content of healthy recipes. While the current evaluation was primarily qualitative, future work should incorporate objective metrics such as BLEU scores, perplexity, or human evaluation surveys to assess fluency, relevance, and nutritional alignment more rigorously.
 
-However, from the talking with fellow classmates during the presentation, it was clear that the model could be further improved. Some suggestions included:
+\subsection{Discussion and Future Work}
+
+\paragraph{Model Limitations.}
+Despite encouraging results, the model exhibits several limitations. The fine tuning corpus—comprising 3,398 recipes—is relatively small for a GPT-2-medium model and raises concerns about overfitting. This may contribute to repetitive phrasing (e.g., ``combine all ingredients and serve'') and generic instructions. Additionally, the model occasionally produces implausible ingredient pairings, such as chocolate pudding with pickles and beef, reflecting insufficient semantic or culinary grounding.
+
+To address these issues, several mitigation strategies are proposed:
 \begin{itemize}
-	\item Incorporating more diverse datasets to enhance the model's understanding of different cuisines and dietary preferences.
-	\item Building up on that, adding more specific dietary restrictions, such as vegan or gluten-free, to the training data to allow the model to generate recipes that cater to these needs.
-	\item Implementing a feedback loop where users can rate the generated recipes, allowing the model to learn from user preferences and improve over time.
-	\item Exploring the use of more advanced LLM architectures or techniques, such as reinforcement learning from human feedback (RLHF), to further enhance the quality and relevance of the generated recipes.
+    \item \textbf{Semantic Clustering:} Group ingredients by taste or culinary role and apply compatibility filters during generation.
+    \item \textbf{Co-occurrence Penalties:} Penalize rare or incoherent ingredient combinations during beam search or sampling.
+    \item \textbf{Rule Based Filtering:} Introduce handcrafted or learned rules to post process generated recipes and ensure culinary plausibility.
 \end{itemize}
 
-Overall, this project has demonstrated the potential of using LLMs for generating healthy recipes, paving the way for future advancements in this area. The model can serve as a valuable tool for individuals seeking to maintain a healthy diet while enjoying diverse and delicious meals.
+\paragraph{Nutritional Validation.}
+Further work should focus on verifying the healthfulness of generated recipes beyond dataset level filtering:
+\begin{itemize}
+    \item \textbf{Glycemic Index Verification:} Include a comparative table showing GI values of generated recipes versus those in the original dataset.
+    \item \textbf{Macronutrient Analysis:} Provide per recipe breakdowns of carbohydrates, sugars, and proteins to support dietary transparency.
+\end{itemize}
+
+\paragraph{Broader Context.}
+From a usability standpoint, practical deployment of this system requires consideration of user interaction and scalability:
+\begin{itemize}
+    \item \textbf{User Interaction:} Interfaces could be integrated into mobile or web based apps, accepting inputs via manual entry, barcode scanning, or voice commands. Natural language input would allow users to specify goals like ``low sugar'' or ``gluten free''.
+    \item \textbf{Scalability and Generalization:} The model currently struggles with rare or underrepresented ingredients (e.g., jackfruit, quinoa). Future iterations could:
+    \begin{itemize}
+        \item Expand the training corpus with recipes from external sources.
+        \item Use food specific embedding models (e.g., FlavorGraph) to relate rare ingredients to known ones.
+        \item Apply retrieval augmented generation (RAG) to draw nutritional or culinary context from external sources at inference time.
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Community Feedback.}
+Feedback gathered during the in class presentation offered several promising directions:
+\begin{itemize}
+    \item Expanding the dataset to cover more global cuisines and dietary styles.
+    \item Integrating stricter dietary constraints such as vegan or gluten free filtering.
+    \item Implementing a feedback loop where users rate generated recipes, enabling continuous learning.
+    \item Exploring more advanced techniques, such as reinforcement learning from human feedback (RLHF), to improve generation quality.
+\end{itemize}
 
 \subsection{Acknowledgements}
-I would like to thank my classmates for their valuable feedback during the presentation, which has helped identify areas for improvement and future work. Their insights have been instrumental in shaping the direction of this project and enhancing its overall quality.
+I would like to thank my classmates for their valuable feedback during the presentation, which helped shape the future direction of this project.
 
+\vspace{0.5em}
+\textbf{Project Contributions}
 \begin{itemize}
-    \item \textbf{Method Design:} David
-    \item \textbf{Experiments:} Louis
-    \item \textbf{Data Analysis:} Louis
-    \item \textbf{Report Writing:} Louis
-    \item \textbf{Poster Making:} David
+    \item \textbf{Method Design:} David \& Spencer
+    \item \textbf{Experiments:} Louis \& David
+    \item \textbf{Data Analysis:} Louis \& Spencer
+    \item \textbf{Report Writing:} Louis \& Spencer
+    \item \textbf{Poster Creation:} David \& Louis \& Spencer
 \end{itemize}

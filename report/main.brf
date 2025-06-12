@@ -1,6 +1,9 @@
-\backcite {radford2019language}{{1}{2}{section.2}}
-\backcite {bien2020recipenlg}{{1}{2}{section.2}}
+\backcite {marin2019recipe1m+}{{1}{2}{section.2}}
+\backcite {lee2020recipegpt}{{1}{2}{section.2}}
+\backcite {yang2022nutritional}{{1}{2}{section.2}}
+\backcite {mehta2023nutribot}{{1}{2}{section.2}}
+\backcite {fang2020diet}{{1}{2}{section.2}}
+\backcite {lee2023llmhealth}{{1}{2}{section.2}}
 \backcite {foodstruct_glycemic_index}{{2}{4.1}{subsection.4.1}}
-\backcite {bien2020recipenlg}{{2}{4.1}{subsection.4.1}}
 \backcite {bien2020recipenlg}{{2}{4.1}{subsection.4.1}}
 \backcite {wolf2019huggingface}{{2}{4.2}{subsection.4.2}}

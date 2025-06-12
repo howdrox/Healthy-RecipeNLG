@@ -1,90 +1,93 @@
 \section{Experiments}
-
 \subsection{Dataset Preparation}
-
-Personalized recipe generation involves creating nutritionally optimized meals tailored to dietary restrictions. We will use the following measurements to define what is "healthy":
+To support personalized, nutritionally aware recipe generation, we defined a "healthy" meal using the following nutritional criteria:
 
 \begin{description}
-	\item[Low Glycemic Index (GI)] GI $\leq$ 55
-	\item[Low Carbohydrates] Total carbs $\leq$ 45--60\,g per meal for adults
-	\item[Low Sugars] Added sugars $< 10\%$ of daily calories
-	\item[Balanced Nutrients] Adequate protein and healthy fats, with minimal saturated fats
-	\item[Portion Control] Reasonable serving sizes to meet caloric needs
+	\item[Low Glycemic Index (GI)] Ingredients must have a GI $\leq$ 55
+	\item[Low Carbohydrates] Total carbohydrates $\leq$ 45--60,g per meal (per adult dietary guidelines)
+	\item[Low Added Sugars] Added sugars contribute less than 10\% of total daily caloric intake
+	\item[Balanced Macronutrients] Recipes contain adequate protein and healthy fats, and minimal saturated fats
+	\item[Portion Control] Servings are appropriately sized to meet average caloric needs
 \end{description}
 
-I then scrapped \cite{foodstruct_glycemic_index} to get the glycemic index of base ingredients. Then filtered the RecipeNLG \cite{bien2020recipenlg} dataset to only include recipes with low glycemic index ingredients. A recipe was kept only if the majority of its ingredients had a glycemic index $\leq$ 55. This brought the dataset from 2,231,142 (\texttt{full\_dataset.csv}) to 3,419 recipes (\texttt{h\_recipes\_50pct.csv}). To speed up training, I then filtered the recipes that have a token count of less than or equal to 512 tokens, which brought the dataset down to 3,398 recipes (\texttt{h\_recipes\_50pct\_token\_max512.csv}). This greatly increased the training speed and reduced the memory usage, as the model was trained on a single GPU with 12.7GB of memory (Google Colab).
+However, we only had time to implement the first criterion, focusing on glycemic index. This choice was made to simplify the dataset preparation process while still allowing for meaningful recipe generation. The glycemic index is a well established measure of how quickly foods raise blood sugar levels, making it a useful proxy for overall meal healthiness.
 
-Since the dataset was not perfectly formatted, I had to do some additional cleaning in the beginning. All recipes had to have ingredients that had a glycemic index, the RecipeNLG dataset sometimes had duplicated ingredients, such as \texttt{apple} and \texttt{apples} so a check for plurals was added.
+To construct a dataset aligned with these criteria, I first extracted glycemic index values for base ingredients using data from \cite{foodstruct_glycemic_index}. The RecipeNLG dataset \cite{bien2020recipenlg} was then filtered to retain only those recipes where the majority of ingredients had a glycemic index $\leq$ 55. This process reduced the dataset from 2,231,142 recipes (\texttt{full\_dataset.csv}) to 3,419 recipes (\texttt{h\_recipes\_50pct.csv}).
 
-Every recipe was tokenized using the \cite{bien2020recipenlg} tokenizer, therefore specific tags had to be added to the recipes.
+For efficiency, only recipes with $\leq$ 512 tokens were kept, further narrowing the dataset to 3,398 entries (\texttt{h\_recipes\_50pct\_token\_max512.csv}). This greatly improved training speed and memory usage, particularly given the use of a single 12.7GB GPU (Google Colab environment).
+
+Additional data cleaning was necessary. Recipes with ingredients not listed in the glycemic index were removed. Ingredient duplication (e.g., both “apple” and “apples”) was resolved by adding basic plural checks.
+
+Each recipe was then tagged according to the format required by the RecipeNLG tokenizer:
+
 \begin{description}
-	\item[\textless RECIPE\_START\textgreater...{\textless RECIPE\_END\textgreater}] Marks the start and end of a recipe.
-	\item[\textless INPUT\_START\textgreater...\textless NEXT\_INPUT\textgreater...\textless INPUT\_END\textgreater] Marks the ingredient names extracted via Named Entity Recognition (NER).
-	\item[\textless INGR\_START\textgreater...\textless NEXT\_INGR\textgreater...\textless INGR\_END\textgreater] Marks the full ingredient lines as listed in the recipe.
-	\item[\textless INSTR\_START\textgreater...\textless NEXT\_INSTR\textgreater...\textless INSTR\_END\textgreater] Marks the step-by-step cooking instructions.
-	\item[\textless TITLE\_START\textgreater...\textless TITLE\_END\textgreater] Marks the recipe title.
+	\item[\texttt{<RECIPE\_START>}...\texttt{<RECIPE\_END>}] Encloses the entire recipe
+	\item[\texttt{<INPUT\_START>}...\texttt{<NEXT\_INPUT>}...\texttt{<INPUT\_END>}] Tags ingredient names extracted via Named Entity Recognition (NER)
+	\item[\texttt{<INGR\_START>}...\texttt{<NEXT\_INGR>}...\texttt{<INGR\_END>}] Tags full ingredient lines
+	\item[\texttt{<INSTR\_START>}...\texttt{<NEXT\_INSTR>}...\texttt{<INSTR\_END>}] Tags individual cooking steps
+	\item[\texttt{<TITLE\_START>}...\texttt{<TITLE\_END>}] Tags the recipe title
 \end{description}
 
-Within each section, items were separated by \texttt{\textless NEXT\_INPUT\textgreater}, \texttt{\textless NEXT\_INGR\textgreater}, or \texttt{\textless NEXT\_INSTR\textgreater} as appropriate.
-
-The final dataset was saved as \texttt{h\_recipes\_50pct\_token\_max512\_tagged.csv}.
+Within each section, items were delimited using \texttt{<NEXT\_INPUT>}, \texttt{<NEXT\_INGR>}, or \texttt{<NEXT\_INSTR>} tags as appropriate. The final preprocessed dataset was saved as \texttt{h\_recipes\_50pct\_token\_max512\_tagged.csv}.
 
 \subsection{Model Training}
-
-The model was trained using the Hugging Face \cite{wolf2019huggingface} Trainer API with the following parameters:
+The model was fine tuned using the Hugging Face \texttt{Trainer} API \cite{wolf2019huggingface} with the following hyperparameters:
 
 \begin{itemize}
-	\item \textbf{Learning rate:} 5e-5
-	\item \textbf{Batch size:} 8 (per device for train \& eval)
+	\item \textbf{Learning Rate:} 5e-5
+	\item \textbf{Batch Size:} 8 (per device, for both training and evaluation)
 	\item \textbf{Epochs:} 10
-	\item \textbf{Optimizer:} AdamW (betas=(0.9, 0.999), eps=1e-8)
-	\item \textbf{Scheduler:} Linear with warmup\_steps=50
-	\item \textbf{Mixed precision:} fp16=True on GPU (as Google Colab was used)
-	\item \textbf{Seed:} 42
-	\item \textbf{Save steps:} 50 (keep the latest 2 checkpoints)
-	\item \textbf{Logging steps:} 100 (loss \& lr to TensorBoard, no WandB)
-	\item See \texttt{notebooks/retrain.ipynb} for the full training script.
+	\item \textbf{Optimizer:} AdamW (betas = (0.9, 0.999), epsilon = 1e-8)
+	\item \textbf{Scheduler:} Linear learning rate decay with 50 warmup steps
+	\item \textbf{Mixed Precision:} Enabled (fp16=True) for faster training on GPU
+	\item \textbf{Random Seed:} 42
+	\item \textbf{Checkpointing:} Every 50 steps, retaining the two most recent checkpoints
+	\item \textbf{Logging:} Every 100 steps (loss and learning rate output to TensorBoard)
 \end{itemize}
 
+For the complete training script, see \texttt{notebooks/retrain.ipynb}.
+
 \subsection{Model Run Parameters}
+\paragraph{Prompt Format.}
 
-The following parameters were used to run the model and generate recipes:
+To generate recipes, the model was given prompts in the following structure:
 
-\textbf{Prompt:}
+\begin{quote}
+	Give me a healthy recipe using the following ingredients (you don't have to use all of them): \texttt{<RECIPE\_START>} \texttt{<INPUT\_START>} chocolate \texttt{<NEXT\_INPUT>} pickles \texttt{<NEXT\_INPUT>} beef \texttt{<NEXT\_INPUT>} pear \texttt{<INPUT\_END>}
+\end{quote}
 
-Give me a healthy recipe using the following ingredients (you don't have to use all of them): \texttt{<RECIPE\_START>} \texttt{<INPUT\_START>} chocolate \texttt{<NEXT\_INPUT>} pickles \texttt{<NEXT\_INPUT>} beef \texttt{<NEXT\_INPUT>} pear \texttt{<INPUT\_END>} (in practice, the spaces were remove to decrease the token count).
+(Whitespace was minimized in practice to reduce token count.)
 
-\textbf{Tokenization parameters:}
+\paragraph{Tokenization Parameters.}
 \begin{itemize}
 	\item \texttt{truncation=True}
 	\item \texttt{max\_length=512}
 	\item \texttt{return\_attention\_mask=True}
 \end{itemize}
 
-\textbf{Generation parameters:}
+\paragraph{Generation Parameters.}
 \begin{itemize}
 	\item \texttt{max\_length=512}
-	\item \texttt{num\_beams=2 or 5}  (for beam search)
+	\item \texttt{num\_beams=2} or \texttt{5} (beam search)
 	\item \texttt{no\_repeat\_ngram\_size=2}
 	\item \texttt{early\_stopping=True}
 	\item \texttt{eos\_token\_id} set to the token ID for \texttt{<RECIPE\_END>}
 \end{itemize}
 
-The \texttt{no\_repeat\_ngram\_size=2} was particularly useful to prevent the model from repeating the same ingredient or instruction multiple times, which is a common issue with text generation models. Moreover, a beam search with \texttt{num\_beams=2} or \texttt{num\_beams=5} was used to improve the quality of the generated recipes, as it allows the model to explore multiple possible continuations of the text and select the most likely one based on the learned probabilities.
+The \texttt{no\_repeat\_ngram\_size=2} setting helped prevent repetitive ingredient or instruction phrases, a common issue in neural text generation. Beam search (with \texttt{num\_beams=2} or \texttt{5}) allowed the model to explore multiple candidate sequences, improving recipe quality.
 
 \subsection{Results}
-
-Here are some examples of the generated recipes with the same base ingredients:
+Below are selected examples generated using the same base ingredients:
 
 \begin{tcolorbox}[recipebox={Melon and Strawberry Ice Cream}]
-	\textbf{Inputs (base ingredients):} milk, cream, strawberry, melon, honey
+	\textbf{Base Ingredients:} milk, cream, strawberry, melon, honey
 
 	\vspace{0.5em}
 	\textbf{Ingredients:}
 	\begin{itemize}
 		\item 2 cups milk
 		\item 1 cup half-and-half cream
-		\item 1/2 cup strawberry, hulled and quartered
+		\item 12 cup strawberry, hulled and quartered
 		\item 8 ounces cantaloupe, peeled, seeded, and cut into 1/2-inch cubes
 		\item 2 tablespoons honey
 	\end{itemize}
@@ -99,7 +102,7 @@ Here are some examples of the generated recipes with the same base ingredients:
 \end{tcolorbox}
 
 \begin{tcolorbox}[recipebox={Melon-Jello Mold}]
-	\textbf{Inputs (base ingredients):} milk, cream, strawberry, melon, honey
+	\textbf{Base Ingredients:} milk, cream, strawberry, melon, honey
 
 	\vspace{0.5em}
 	\textbf{Ingredients:}
@@ -119,18 +122,10 @@ Here are some examples of the generated recipes with the same base ingredients:
 	\end{enumerate}
 \end{tcolorbox}
 
-Next I tried adding an ingredient that is would not fit in such a recipe, such as \texttt{salmon}:
+Adding an incompatible ingredient like \texttt{salmon} yields a more creative, yet plausible recipe:
 
 \begin{tcolorbox}[recipebox={Grilled Salmon With Strawberry Sauce}]
-	\textbf{Inputs (base ingredients):}
-	\begin{itemize}
-		\item milk
-		\item cream
-		\item strawberry
-		\item melon
-		\item honey
-		\item salmon
-	\end{itemize}
+	\textbf{Base Ingredients:} milk, cream, strawberry, melon, honey, salmon
 
 	\vspace{0.5em}
 	\textbf{Ingredients:}
@@ -152,22 +147,16 @@ Next I tried adding an ingredient that is would not fit in such a recipe, such a
 	\end{enumerate}
 \end{tcolorbox}
 
-However, the model does not always pair the ingredients in the most optimal way, as shown in the following example. A better recipe would have been to match the \texttt{pear} and \texttt{chocolate} together, and the \texttt{beef} and \texttt{pickles} together.
+However, ingredient pairing is not always optimal. For example:
 
 \begin{tcolorbox}[recipebox={Dried Beef And Pear Salad}]
-	\textbf{Inputs (base ingredients):}
-	\begin{itemize}
-		\item chocolate
-		\item pickles
-		\item beef
-		\item pear
-	\end{itemize}
+	\textbf{Base Ingredients:} chocolate, pickles, beef, pear
 
 	\vspace{0.5em}
 	\textbf{Ingredients:}
 	\begin{itemize}
 		\item 1 (4 oz.) pkg. chocolate or butterscotch pudding mix
-		\item 1/2 cup chopped pickles
+		\item 1/2 c. chopped pickles
 		\item 2 oz. jar dried beef, chopped
 		\item peel of 1/4 medium pear
 	\end{itemize}
